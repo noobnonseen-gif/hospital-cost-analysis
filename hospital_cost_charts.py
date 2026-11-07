@@ -6,7 +6,7 @@ df = pd.read_csv('data/hospital_cost.csv')
 print(df.head())
 print(df.columns)
 
-# Calculate average charges by smoking status (mean)
+## Chart1: Calculate average charges by smoking status (mean)
 average_charges = df.groupby("smoker")["charges"].mean()
 plt.figure()
 ax_mean = average_charges.plot (kind="bar")
@@ -28,7 +28,7 @@ plt.ylabel("Average Charges")
 plt.xticks(rotation=45)
 plt.tight_layout()
 
-#Calculate average charges by smoking status (median)
+## Chart2: Calculate average charges by smoking status (median)
 median_charges = df.groupby("smoker")["charges"].median()
 plt.figure()
 
@@ -49,7 +49,7 @@ plt.ylabel("Median Charges")
 plt.xticks(rotation=45)
 plt.tight_layout()
 
-## Stacked Histogram by Smoking Status
+## Chart3: Stacked Histogram by Smoking Status
 plt.figure()
 
 no_charges = df[df["smoker"] == "no"]["charges"]
@@ -72,7 +72,7 @@ plt.ylabel("Frequency")
 plt.legend(title="Smoking Status")
 plt.tight_layout()
 
-## Box Plot Healthcare Charges by Smoking Status
+## Chart4: Box Plot Healthcare Charges by Smoking Status
 
 no_smoker_charges = df[df["smoker"] == "no"]["charges"]
 yes_smoker_charges = df[df["smoker"] == "yes"]["charges"]
@@ -92,5 +92,37 @@ plt.title(
 plt.xlabel("Smoking Status")
 plt.ylabel("Healthcare Charges")
 plt.tight_layout()
+
+## Chart5: Scatter Plot by Smoking Status (Age vs. Charges)
+no_smoker = df[df["smoker"] == "no"]
+yes_smoker = df[df["smoker"] == "yes"]
+
+plt.figure()
+
+plt.scatter(
+    no_smoker["age"],
+    no_smoker["charges"],
+    color="blue",
+    alpha=0.5,
+    label="No"
+)
+plt.scatter(
+    yes_smoker["age"],
+    yes_smoker["charges"],
+    color="red",
+    alpha=0.5,
+    label="Yes"
+)
+plt.title(
+    "Age vs. Charges by Smoking Status",
+    fontweight="bold"
+)
+plt.xlabel("Age")
+plt.ylabel("Charges")
+plt.legend()
+plt.tight_layout()
+
+## Chart6: 
+
 
 plt.show()
