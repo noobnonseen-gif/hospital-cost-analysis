@@ -29,7 +29,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 #Calculate average charges by smoking status (median)
-
 median_charges = df.groupby("smoker")["charges"].median()
 plt.figure()
 
@@ -50,6 +49,7 @@ plt.ylabel("Median Charges")
 plt.xticks(rotation=45)
 plt.tight_layout()
 
+## Stacked Histogram by Smoking Status
 plt.figure()
 
 no_charges = df[df["smoker"] == "no"]["charges"]
@@ -71,4 +71,26 @@ plt.xlabel("Healthcare Charges")
 plt.ylabel("Frequency")
 plt.legend(title="Smoking Status")
 plt.tight_layout()
+
+## Box Plot Healthcare Charges by Smoking Status
+
+no_smoker_charges = df[df["smoker"] == "no"]["charges"]
+yes_smoker_charges = df[df["smoker"] == "yes"]["charges"]
+
+plt.figure()
+
+plt.boxplot(
+    [no_smoker_charges, yes_smoker_charges],
+    tick_labels=["No", "Yes"],
+    ## Sử dụng whis 2.5 IQR nhằm giảm sự rối mắt do các ngoại lệ phát sinh
+    whis=2.5
+)
+plt.title(
+    "Healthcare Charges by Smoking Status",
+    fontweight="bold"
+)
+plt.xlabel("Smoking Status")
+plt.ylabel("Healthcare Charges")
+plt.tight_layout()
+
 plt.show()
