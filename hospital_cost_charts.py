@@ -50,4 +50,25 @@ plt.ylabel("Median Charges")
 plt.xticks(rotation=45)
 plt.tight_layout()
 
+plt.figure()
+
+no_charges = df[df["smoker"] == "no"]["charges"]
+yes_charges = df[df["smoker"] == "yes"]["charges"]
+
+plt.hist(
+    [no_charges, yes_charges],
+    bins=30,
+    stacked=True,
+    label=["No", "Yes"],
+    color=["blue", "red"]
+)
+
+plt.title(
+    "Distribution of Healthcare Charges",
+    fontweight="bold"
+)
+plt.xlabel("Healthcare Charges")
+plt.ylabel("Frequency")
+plt.legend(title="Smoking Status")
+plt.tight_layout()
 plt.show()
