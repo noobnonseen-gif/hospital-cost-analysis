@@ -202,6 +202,43 @@ plt.ylabel("Average Charges")
 plt.xticks(rotation=45)
 plt.tight_layout()
 
-
+## Chart8: Average Charges by BMI group
+bmi_bins = [0, 18.5, 25, 30, float("inf")]
+bmi_labels = [
+    "Underweight",
+    "Normal",
+    "Overweight",
+    "Obese"
+]
+df["bmi_group"] = pd.cut(
+    df["bmi"],
+    bins=bmi_bins,
+    labels=bmi_labels,
+    right=False
+)
+average_charges_by_bmi = df.groupby(
+    "bmi_group",
+    observed=False
+)["charges"].mean()
+plt.figure()
+ax_bmi = average_charges_by_bmi.plot (
+    kind="bar",
+    color="steelblue"
+)
+ax_bmi.bar_label(
+    ax_bmi.containers[0],
+    fmt="%.0f",
+    label_type="center",
+    color="white",
+    fontweight="bold",
+)
+plt.title(
+    "Average Charges by BMI Group",
+    fontweight="bold"
+)
+plt.xlabel("BMI Group")
+plt.ylabel("Average Charges")
+plt.xticks(rotation=45)
+plt.tight_layout()
 
 plt.show()
