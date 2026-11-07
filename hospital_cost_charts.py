@@ -122,7 +122,49 @@ plt.ylabel("Charges")
 plt.legend()
 plt.tight_layout()
 
-## Chart6: 
+## Chart6: Scatter Plot by Smoking Status (BMI vs. Charges)
+plt.figure()
 
+plt.axvline(
+    x=18.5,
+    color="black",
+    linestyle="--",
+    linewidth=1
+)
+plt.axvline(
+    x=25,
+    color="black",
+    linestyle="--",
+    linewidth=1
+)
+plt.axvspan(
+    18.5,
+    25,
+    color="lightgreen",
+    alpha=0.18
+)
+
+plt.scatter(
+    no_smoker["bmi"],
+    no_smoker["charges"],
+    color="blue",
+    alpha=0.5,
+    label="No"
+)
+plt.scatter(
+    yes_smoker["bmi"],
+    yes_smoker["charges"],
+    color="red",
+    alpha=0.5,
+    label="Yes"
+)
+plt.title(
+    "BMI vs. Charges by Smoking Status",
+    fontweight="bold"
+)
+plt.xlabel("BMI")
+plt.ylabel("Charges")
+plt.legend()
+plt.tight_layout()
 
 plt.show()
