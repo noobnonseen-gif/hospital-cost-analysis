@@ -167,4 +167,41 @@ plt.ylabel("Charges")
 plt.legend()
 plt.tight_layout()
 
+## Chart7: Average Charges by Age Group
+age_bins = [17, 25, 35, 45, 55, float("inf")]
+ave_label = ["18-25", "25-35", "35-45", "45-55", "Over 55"]
+df["age group"] = pd.cut(
+    df["age"],
+    bins=age_bins,
+    labels=ave_label
+)
+average_charges_by_age = df.groupby(
+    "age group",
+    observed=False,
+)["charges"].mean()
+
+plt.figure()
+
+ax_age = average_charges_by_age.plot (
+    kind="bar",
+    color="steelblue"
+)
+ax_age.bar_label(
+    ax_age.containers[0],
+    fmt="%.0f",
+    label_type="center",
+    color="white",
+    fontweight="bold",
+)
+plt.title(
+    "Average Charges by Age Group",
+    fontweight="bold"
+)
+plt.xlabel("Age Group")
+plt.ylabel("Average Charges")
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+
+
 plt.show()
